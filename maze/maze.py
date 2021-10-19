@@ -64,7 +64,7 @@ class Maze:
 				stack.pop()
 	
 	#solves the maze in the same way that it was populated, but instead backtracks when the connected cells have been visited or have a wall blocking the path
-	def solveMaze(self):
+	def solveMazeDF(self):
 		stack = []
 		self.maze[0][0].visited, self.maze[0][0].correct = True, True
 		stack.append(self.maze[0][0])
