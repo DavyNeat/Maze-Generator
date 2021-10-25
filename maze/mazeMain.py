@@ -2,7 +2,7 @@ from maze import Maze
 import pygame
 import time
 	
-def getWalls(mainMaze):
+def getWalls(mainMaze, width, height, cell_width, cell_height, line_width):
 	#makes and returns a list of all the walls in the maze as rectangles
 	walls = []
 	for y in range(mainMaze.height):
@@ -17,9 +17,7 @@ def getWalls(mainMaze):
 				walls.append(pygame.Rect(((width//mainMaze.width) * x), ((height//mainMaze.height) * y), (line_width), (cell_height)))
 	return walls
 	
-
-
-if __name__ == "__main__":
+def main():
 	height, width = 1000, 1000
 	white = (255, 255, 255)
 	line = (0, 0, 0)
@@ -37,7 +35,7 @@ if __name__ == "__main__":
 	window = pygame.display.set_mode((width, height))
 
 	sizeX, sizeY = cell_width//3, cell_height//3
-	walls = getWalls(mainMaze)
+	walls = getWalls(mainMaze, width, height, cell_width, cell_height, line_width)
 
 	playerRect = pygame.Rect(playerX, playerY, sizeX, sizeY)
 
@@ -53,7 +51,7 @@ if __name__ == "__main__":
 					mainMaze = Maze(cellsX, cellsY)
 					cell_width, cell_height = width//mainMaze.width, height//mainMaze.height
 					mainMaze.populate_maze()
-					walls = getWalls(mainMaze)
+					walls = getWalls(mainMaze, width, height, cell_width, cell_height, line_width)
 					playerX, playerY = 5, 5
 					sizeX, sizeY = cell_width//3, cell_height//3
 				if event.key == pygame.K_RETURN:
@@ -100,3 +98,6 @@ if __name__ == "__main__":
 		for x in range(len(walls)):
 			pygame.draw.rect(window, line, walls[x])
 		pygame.display.update()
+
+if __name__ == "__main__":
+	main()
